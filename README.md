@@ -1,24 +1,25 @@
-# bee-sim-knapsack
+# Bee Simulator - 0/1 Knapsack Problem & Recursion Demonstration
 
-A whimsical example of a recursive algorithm used to solve the knapsack problem, using a fun bee simulation!
+Example polynomial-time **(𝑂(𝑛 × 𝑚))**  recursive algorithm used to solve the knapsack problem, using a fun bee simulation!
+
+
 
 ## Objective
 Maximize the equal collection of nectar and pollen from flowers in a single trip, while keeping time and space complexity of the implementation as low as possible
 
 ## Constraints
-1. Each flower provides a fixed amount of nectar and pollen
+1. Each flower provides a fixed amount of nectar
 2. Each flower requires a fixed amount of energy to visit
 3. The bee has a fixed amount of energy to spend
 4. The bee can only visit each flower once
-5. The bee can only carry a fixed amount of nectar and pollen
-6. The bee must collect all nectar and pollen from a flower or none at all
+5. The bee can only carry a fixed amount of nectar
+6. The bee must collect all nectar from a flower or none at all (0/1)
 
 ## Key Concepts
 - Recursion
 - Dynamic Programming
 - Memoization
 - Knapsack Problem
-- Greedy Algorithm
 - Backtracking
 - Depth-First Search
 - Breadth-First Search

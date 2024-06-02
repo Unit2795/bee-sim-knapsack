@@ -98,9 +98,9 @@ def main():
     # Bee energy is akin to the weight limit of the knapsack problem
     bee_energy = 100
 
-    total_flowers = len(avail_flowers)
     # Initialize the dynamic programming table used for memoization
     # Columns represent the bee's energy and the rows represent the flowers
+    total_flowers = len(avail_flowers)
     dp = [[0] * (bee_energy + 1) for _ in range(total_flowers)]
 
     # Initialize the choices table to keep track of the flowers the bee chooses
@@ -109,8 +109,11 @@ def main():
     # Call the bee simulator function to find the optimal solution
     result = bee_simulator(avail_flowers, total_flowers - 1, bee_energy, dp, total_flowers, choices)
 
+    # Print the DP and trace back table if logging is enabled
     print_matrix(dp, "Dynamic Programming Table (2D Matrix)")
     print_matrix(choices, "Choices Table (2D Matrix)")
+
+    # Begin the simulation/game loop
     print_in_color(
         f"☀️ Your bee has woken up in a beautiful meadow on a sunny day and is ready to start collecting nectar! 🌻",
         MessageColor.YELLOW)
