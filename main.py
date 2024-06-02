@@ -2,7 +2,7 @@ import math
 import random
 import time
 
-from flowers import flowers as avail_flowers
+from flowers import hundred_flower_meadow as avail_flowers
 from helpers import print_matrix, print_info_message, print_in_color, MessageColor
 
 
@@ -22,7 +22,8 @@ def bee_simulator(flowers, flower_index, bee_energy, dp, total_flowers, choices)
     # If the current flower's energy cost is greater than the bee's remaining energy,
     # we skip this flower and move on to the next.
     if current_flower.energy_cost > bee_energy:
-        print_info_message(f"Skipping {current_flower.type} due to high energy cost. Needed Energy: {current_flower.energy_cost}. Available energy: {bee_energy}. Deficit: {bee_energy - current_flower.energy_cost}  (Row: {flower_index}, Column: {bee_energy})")
+        print_info_message(
+            f"Skipping {current_flower.type} due to high energy cost. Needed Energy: {current_flower.energy_cost}. Available energy: {bee_energy}. Deficit: {bee_energy - current_flower.energy_cost}  (Row: {flower_index}, Column: {bee_energy})")
         return bee_simulator(flowers, flower_index - 1, bee_energy, dp, total_flowers, choices)
     else:
         # Perform a comparison between two scenarios:
@@ -30,7 +31,8 @@ def bee_simulator(flowers, flower_index, bee_energy, dp, total_flowers, choices)
         # 2. The bee skips the current flower and moves on to the next one
         # The optimal solution is the maximum nectar value of these two scenarios.
         collect = current_flower.nectar + bee_simulator(flowers, flower_index - 1,
-                                                        bee_energy - current_flower.energy_cost, dp, total_flowers, choices)
+                                                        bee_energy - current_flower.energy_cost, dp, total_flowers,
+                                                        choices)
         not_collect = bee_simulator(flowers, flower_index - 1, bee_energy, dp, total_flowers, choices)
 
         # Determine which scenario yields the maximum nectar value
@@ -80,14 +82,15 @@ def print_collected_flowers(flowers, bee_energy, choices):
             # We'll keep evaluating from here until the bee is out of energy or there are no more flowers
             e -= flowers[i].energy_cost
 
-
     # Main simulation loop
     for flower in collected_flowers:
         # Simulate the bee collecting nectar from the flower by sleeping for a random amount of time
         # The delay is proportional to the energy cost of the flower and is a random value between half and the full energy cost in seconds
         delay = random.uniform(math.ceil(flower[2] / 2), flower[2])
         time.sleep(delay)
-        print_in_color(f"Bee collected {flower[1]} nectar from a {flower[0]}, expending {flower[2]} energy. (Total Nectar: {flower[4]}) (Remaining Energy: {flower[3]})", MessageColor.GREEN)
+        print_in_color(
+            f"Bee collected {flower[1]} nectar from a {flower[0]}, expending {flower[2]} energy. (Total Nectar: {flower[4]}) (Remaining Energy: {flower[3]})",
+            MessageColor.GREEN)
 
 
 # Initialize parameters for the bee simulator and call the function
@@ -108,9 +111,13 @@ def main():
 
     print_matrix(dp, "Dynamic Programming Table (2D Matrix)")
     print_matrix(choices, "Choices Table (2D Matrix)")
-    print_in_color(f"☀️ Your bee has woken up in a beautiful meadow on a sunny day and is ready to start collecting nectar! 🌻", MessageColor.YELLOW)
+    print_in_color(
+        f"☀️ Your bee has woken up in a beautiful meadow on a sunny day and is ready to start collecting nectar! 🌻",
+        MessageColor.YELLOW)
     print_collected_flowers(avail_flowers, bee_energy, choices)
-    print_in_color("🌙 The day is over and your bee is sleepy, they have returned to the hive for a good night's rest... 💤", MessageColor.BLUE)
+    print_in_color(
+        "🌙 The day is over and your bee is sleepy, they have returned to the hive for a good night's rest... 💤",
+        MessageColor.BLUE)
     print_in_color(f"Total nectar collected by your bee: {result}. Great Job! ⭐", MessageColor.MAGENTA)
 
 

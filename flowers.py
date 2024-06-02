@@ -1,3 +1,5 @@
+# Define your own custom fields of flowers here
+
 class Flower:
     def __init__(self, type, nectar, energy_cost):
         self.type = type
@@ -5,20 +7,22 @@ class Flower:
         self.energy_cost = energy_cost
 
 
-# flowers = [
-#     Flower(type="rose", nectar=10, energy_cost=5),
-#     Flower(type="honeysuckle", nectar=20, energy_cost=8),
-#     Flower(type="sunflower", nectar=15, energy_cost=10),
-#     Flower(type="daisy", nectar=10, energy_cost=4),
-#     Flower(type="orchid", nectar=5, energy_cost=2),
-#     Flower(type="rose", nectar=12, energy_cost=6),
-#     Flower(type="sunflower", nectar=12, energy_cost=8),
-#     Flower(type="daisy", nectar=6, energy_cost=2),
-#     Flower(type="orchid", nectar=6, energy_cost=3),
-#     Flower(type="rose", nectar=8, energy_cost=4)
-# ]
+# Small meadow with 10 flowers
+tiny_meadow = [
+    Flower(type="rose", nectar=10, energy_cost=5),
+    Flower(type="honeysuckle", nectar=20, energy_cost=8),
+    Flower(type="sunflower", nectar=15, energy_cost=10),
+    Flower(type="daisy", nectar=10, energy_cost=4),
+    Flower(type="orchid", nectar=5, energy_cost=2),
+    Flower(type="rose", nectar=12, energy_cost=6),
+    Flower(type="sunflower", nectar=12, energy_cost=8),
+    Flower(type="daisy", nectar=6, energy_cost=2),
+    Flower(type="orchid", nectar=6, energy_cost=3),
+    Flower(type="rose", nectar=8, energy_cost=4)
+]
 
-flowers = [
+# Large meadow with 100 flowers
+hundred_flower_meadow = [
     Flower(type="rose", nectar=10, energy_cost=5),
     Flower(type="honeysuckle", nectar=20, energy_cost=8),
     Flower(type="sunflower", nectar=15, energy_cost=10),
