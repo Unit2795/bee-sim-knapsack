@@ -20,6 +20,7 @@ class BeeSimulator:
         # -1 denotes an uncomputed value
         self.total_flowers = len(game_map)
         self.dp = [[-1] * (bee_energy + 1) for _ in range(self.total_flowers)]
+        self.collected_flowers = []
         self.max_nectar = 0
 
 
@@ -28,22 +29,22 @@ class BeeSimulator:
         # Call the bee simulator function to find the optimal solution
         self.max_nectar = self._max_nectar_recursive(self.flowers, self.total_flowers - 1, self.bee_energy)
         # Trace back the choices made to determine which flowers will actually be collected by the bee
-        collected_flowers = self._traceback(self.flowers, self.bee_energy)
+        self._traceback(self.flowers, self.bee_energy)
 
         # Print the DP and trace back table if logging is enabled
         print_matrix(self.dp, "Dynamic Programming Table")
 
         # Begin the game loop
-        self._play_simulation(collected_flowers)
+        self._play_simulation()
 
         return self.max_nectar
 
     # Main game loop to simulate the bee collecting nectar from flowers
-    def _play_simulation(self, collected_flowers):
+    def _play_simulation(self):
         print_in_color(
             f"☀️ Your bee has woken up in a beautiful meadow on a sunny day and is ready to start collecting nectar! 🌻",
             MessageColor.YELLOW)
-        self._game_loop(collected_flowers)
+        self._game_loop()
         print_in_color(
             "🌙 The day is over and your bee is sleepy, they have returned to the hive for a good night's rest... 💤",
             MessageColor.BLUE)
@@ -51,8 +52,8 @@ class BeeSimulator:
         print_in_color(f"Total nectar collected by your bee: {self.max_nectar}. Great Job! ⭐", MessageColor.MAGENTA)
 
     # Main game loop to simulate the bee collecting nectar from flowers
-    def _game_loop(self, collected_flowers):
-        for flower in collected_flowers:
+    def _game_loop(self):
+        for flower in self.collected_flowers:
             # Simulate the bee collecting nectar from the flower by sleeping for a random amount of time
             # The delay is proportional to the energy cost of the flower and is a random value between half and the full energy cost in seconds
             if self.sim_speed != 0:
@@ -65,7 +66,6 @@ class BeeSimulator:
     # Trace back the choices made to determine which flowers were actually collected by the bee
     def _traceback(self, flowers, bee_energy):
         # Start the bee with no collected flowers and maximum energy
-        collected_flowers = []
         energy = bee_energy
         total_nectar = 0
 
@@ -74,14 +74,12 @@ class BeeSimulator:
             # If the bee chose to collect the current flower, it is part of the optimal solution
             if self.dp[flower][energy] != -1 and (flower == 0 or self.dp[flower][energy] != self.dp[flower - 1][energy]):
                 total_nectar += flowers[flower].nectar
-                flower_info = (flowers[flower].name, flowers[flower].nectar, flowers[flower].energy_cost, energy, total_nectar)
-                collected_flowers.append(flower_info)
+                flower_info = (flowers[flower].name, flowers[flower].nectar, flowers[flower].energy_cost, energy, total_nectar, flower)
+                self.collected_flowers.append(flower_info)
 
                 # Move the bee's energy to the left by the energy cost of the flower
                 # We'll keep evaluating from here until the bee is out of energy or there are no more flowers
                 energy -= flowers[flower].energy_cost
-
-        return collected_flowers
 
     # Primary recursive function to find the maximum nectar the bee can collect (Knapsack Problem Algorithm)
     def _max_nectar_recursive(self, flowers, flower_index, bee_energy):
