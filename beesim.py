@@ -9,7 +9,7 @@ from helpers import print_info_message, print_in_color, MessageColor, print_matr
 
 class BeeSimulator:
     # Initialize the BeeSimulator with the game config (available flowers and the bee's energy)
-    def __init__(self, bee_energy=100, game_map=avail_flowers, sim_speed=None):
+    def __init__(self, sim_speed=None, bee_energy=100, game_map=avail_flowers):
         # Initialize the game map with the available flowers
         self.flowers = game_map
         # Bee energy is akin to the weight limit of the knapsack problem
