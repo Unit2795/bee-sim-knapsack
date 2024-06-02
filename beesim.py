@@ -70,16 +70,16 @@ class BeeSimulator:
         total_nectar = 0
 
         # Start in the bottom right corner of the choices table
-        for flower in reversed(range(len(flowers))):
+        for flower_index in reversed(range(len(flowers))):
             # If the bee chose to collect the current flower, it is part of the optimal solution
-            if self.dp[flower][energy] != -1 and (flower == 0 or self.dp[flower][energy] != self.dp[flower - 1][energy]):
-                total_nectar += flowers[flower].nectar
-                flower_info = (flowers[flower].name, flowers[flower].nectar, flowers[flower].energy_cost, energy, total_nectar, flower)
+            if self.dp[flower_index][energy] != -1 and (flower_index == 0 or self.dp[flower_index][energy] != self.dp[flower_index - 1][energy]):
+                total_nectar += flowers[flower_index].nectar
+                flower_info = (flowers[flower_index].name, flowers[flower_index].nectar, flowers[flower_index].energy_cost, energy, total_nectar, flower_index)
                 self.collected_flowers.append(flower_info)
 
                 # Move the bee's energy to the left by the energy cost of the flower
                 # We'll keep evaluating from here until the bee is out of energy or there are no more flowers
-                energy -= flowers[flower].energy_cost
+                energy -= flowers[flower_index].energy_cost
 
     # Primary recursive function to find the maximum nectar the bee can collect (Knapsack Problem Algorithm)
     def _max_nectar_recursive(self, flowers, flower_index, bee_energy):
@@ -89,6 +89,10 @@ class BeeSimulator:
             return 0
 
         # If the current cell in the DP table has already been calculated (memoized), return the value.
+        # This is akin to reading the DP table from the left to right, top to bottom, you will often look at previously
+        #   calculated values before computing a new one and it's inefficient to recompute the same value multiple
+        #   times. Try running the program with and without this check on profiling mode and watch the number of calls
+        #   made to this function.
         if self.dp[flower_index][bee_energy] != -1:
             return self.dp[flower_index][bee_energy]
 
@@ -97,6 +101,7 @@ class BeeSimulator:
 
         # If the current flower's energy cost is greater than the bee's remaining energy,
         # we skip this flower and move on to the next.
+        # This is akin to moving to the next row in the DP table, because the bee does not have enough energy to visit this flower.
         if current_flower.energy_cost > bee_energy:
             print_info_message(
                 f"Skipping {current_flower.name} due to high energy cost. Needed Energy: {current_flower.energy_cost}. Available energy: {bee_energy}. Deficit: {bee_energy - current_flower.energy_cost}  (Row: {flower_index}, Column: {bee_energy})")
@@ -106,9 +111,13 @@ class BeeSimulator:
             # 1. The bee collects the nectar and pollen from the current flower
             # 2. The bee skips the current flower and moves on to the next one
             # The optimal solution is the maximum nectar value of these two scenarios.
+            # This is akin to adding the current flower's nectar to the nectar of the previous row's column
+            #   where the remaining energy is the current energy minus the energy cost of the current flower
             collect = current_flower.nectar + self._max_nectar_recursive(flowers, flower_index - 1,
                                                                          bee_energy - current_flower.energy_cost)
+            # This is akin to just taking the value from the previous row in the current column
             not_collect = self._max_nectar_recursive(flowers, flower_index - 1, bee_energy)
+            # If taking the current flower is more profitable, we update the result
             result = max(collect, not_collect)
 
             # Print information about the current flower and the decision-making process
