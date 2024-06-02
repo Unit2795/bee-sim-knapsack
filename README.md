@@ -1,10 +1,10 @@
 # Bee Simulator - 0/1 Knapsack Problem & Recursion Demonstration 🐝🌻
 
-![alt text](example.png "Title")
+![CLI output from Bee Simulator](example.png "Title")
 
-Simple example of the knapsack problem solved by a recursive algorithm, using a fun and whimsical bee simulation!
+Simple example of the knapsack problem solved with a recursive algorithm, using a fun and whimsical CLI idle game/simulation about a nectar collecting bee!
 
-Polynomial-time **(𝑂(𝑛 × 𝑚)) implementation
+Polynomial-time **(𝑂(𝑛 × 𝑚)) implementation (n = number of flowers, m = max energy)**
 
 ## Objective
 Maximize the amount of nectar a bee can harvest in a day without exceeding its available energy.
