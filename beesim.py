@@ -9,17 +9,19 @@ from helpers import print_info_message, print_in_color, MessageColor, print_matr
 
 class BeeSimulator:
     # Initialize the BeeSimulator with the game config (available flowers and the bee's energy)
-    def __init__(self, bee_energy=100, game_map=avail_flowers):
+    def __init__(self, bee_energy=100, game_map=avail_flowers, sim_speed=None):
         # Initialize the game map with the available flowers
         self.flowers = game_map
         # Bee energy is akin to the weight limit of the knapsack problem
         self.bee_energy = bee_energy
+        self.sim_speed = sim_speed if sim_speed is not None else int(os.environ.get("SPEED", 1))
         # Initialize the dynamic programming table used for memoization
         # Columns represent the bee's energy and the rows represent the flowers
         # -1 denotes an uncomputed value
         self.total_flowers = len(game_map)
         self.dp = [[-1] * (bee_energy + 1) for _ in range(self.total_flowers)]
         self.max_nectar = 0
+
 
     # Start the bee simulation
     def start(self):
@@ -34,6 +36,8 @@ class BeeSimulator:
         # Begin the game loop
         self._play_simulation(collected_flowers)
 
+        return self.max_nectar
+
     # Main game loop to simulate the bee collecting nectar from flowers
     def _play_simulation(self, collected_flowers):
         print_in_color(
@@ -47,15 +51,13 @@ class BeeSimulator:
         print_in_color(f"Total nectar collected by your bee: {self.max_nectar}. Great Job! ⭐", MessageColor.MAGENTA)
 
     # Main game loop to simulate the bee collecting nectar from flowers
-    @staticmethod
-    def _game_loop(collected_flowers):
+    def _game_loop(self, collected_flowers):
         for flower in collected_flowers:
             # Simulate the bee collecting nectar from the flower by sleeping for a random amount of time
             # The delay is proportional to the energy cost of the flower and is a random value between half and the full energy cost in seconds
-            sim_speed = int(os.environ.get("SPEED", 1))
-            if sim_speed != 0:
+            if self.sim_speed != 0:
                 delay: int = math.ceil(random.uniform(flower[2] / 2, flower[2]))
-                time.sleep(delay * sim_speed)
+                time.sleep(delay * self.sim_speed)
             print_in_color(
                 f"Bee collected {flower[1]} nectar from a {flower[0]}, expending {flower[2]} energy. (Total Nectar: {flower[4]}) (Remaining Energy: {flower[3]})",
                 MessageColor.GREEN)
