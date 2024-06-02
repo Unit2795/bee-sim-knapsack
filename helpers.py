@@ -4,8 +4,7 @@ import os
 
 # Format and print the dynamic programming table (2D Matrix)
 def print_matrix(matrix, title):
-    print_info_message(title)
-    print_info_message('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in matrix]))
+    print_info_message(title + "\n" + '\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in matrix]))
 
 
 # Print an informational message in cyan if the DEBUG environment variable is set

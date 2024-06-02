@@ -32,11 +32,15 @@ How to get the necessary dependencies installed to run this project
 ## Usage
 How to run and configure the project
 
+### Simulation Speed
+The simulation speed can be adjusted by setting the `SPEED` environment variable. The smallest possible value is 0, which will run the simulation instantaneously. The default value is 1.
+
+### Debugging
+When running the main script file, set the DEBUG environment variable to `1` to enable debugging output.
+
 ## Uses
 Additional uses of knapsack problem, especially real-world ones
 
 ## Next Steps
 Ways in which the depth of the simulation could be enhanced, the complexity of the problem increased, or the performance of the algorithm improved
 
-## Debugging
-When running the main script file, set the DEBUG environment variable to `1` to enable debugging output.
