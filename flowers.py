@@ -21,7 +21,7 @@ tiny_meadow = [
     Flower(name="rose", nectar=8, energy_cost=4)
 ]
 
-# Large meadow with 100 flowers - The max nectar that can be collected is 279
+# Large meadow with 100 flowers
 hundred_flower_meadow = [
     Flower(name="rose", nectar=10, energy_cost=5),
     Flower(name="honeysuckle", nectar=20, energy_cost=8),
