@@ -2,8 +2,6 @@
 
 Example polynomial-time **(𝑂(𝑛 × 𝑚))**  recursive algorithm used to solve the knapsack problem, using a fun bee simulation!
 
-
-
 ## Objective
 Maximize the equal collection of nectar and pollen from flowers in a single trip, while keeping time and space complexity of the implementation as low as possible
 
@@ -26,7 +24,19 @@ Maximize the equal collection of nectar and pollen from flowers in a single trip
 - Graph Theory
 - Graph Traversal
 - Graph Search
-- Graph Algorithms
+- Graph Algorithm
 
-# Debugging
+## Install & Dependencies
+How to get the necessary dependencies installed to run this project
+
+## Usage
+How to run and configure the project
+
+## Uses
+Additional uses of knapsack problem, especially real-world ones
+
+## Next Steps
+Ways in which the depth of the simulation could be enhanced, the complexity of the problem increased, or the performance of the algorithm improved
+
+## Debugging
 When running the main script file, set the DEBUG environment variable to `1` to enable debugging output.
