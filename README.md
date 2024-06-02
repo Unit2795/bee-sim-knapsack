@@ -1,9 +1,13 @@
-# Bee Simulator - 0/1 Knapsack Problem & Recursion Demonstration
+# Bee Simulator - 0/1 Knapsack Problem & Recursion Demonstration 🐝🌻
 
-Example polynomial-time **(𝑂(𝑛 × 𝑚))**  recursive algorithm used to solve the knapsack problem, using a fun bee simulation!
+![alt text](example.png "Title")
+
+Simple example of the knapsack problem solved by a recursive algorithm, using a fun and whimsical bee simulation!
+
+Polynomial-time **(𝑂(𝑛 × 𝑚)) implementation
 
 ## Objective
-Maximize the equal collection of nectar and pollen from flowers in a single trip, while keeping time and space complexity of the implementation as low as possible
+Maximize the amount of nectar a bee can harvest in a day without exceeding its available energy.
 
 ## Constraints
 1. Each flower provides a fixed amount of nectar
@@ -19,12 +23,6 @@ Maximize the equal collection of nectar and pollen from flowers in a single trip
 - Memoization
 - Knapsack Problem
 - Backtracking
-- Depth-First Search
-- Breadth-First Search
-- Graph Theory
-- Graph Traversal
-- Graph Search
-- Graph Algorithm
 
 ## Install & Dependencies
 You'll need Python 3.12 or later to run this project.
@@ -61,8 +59,27 @@ py tests/references.py
 ```
 
 ## Uses
-Additional uses of knapsack problem, especially real-world ones
+Some real-world applications of the knapsack problem include:
+- Cost benefit analysis
+  - Determining the most cost-effective way to spend a budget
+- Resource allocation
+  - Assigning resources to maximize output
+- Sprint planning
+  - Determining the most valuable tasks to complete in a sprint
+- Investment
+  - Selecting the best stocks to invest in given a set budget 
 
 ## Next Steps
-Ways in which the depth of the simulation could be enhanced, the complexity of the problem increased, or the performance of the algorithm improved
+This library could be a small part of a larger simulation or game. Some ideas for expanding the project include:
+- Adding in pollen as a secondary resource to collect and balance
+- Adding in distance between flowers that takes energy to traverse (Traveling Salesman Problem)
+- Adding more bees, specialized roles, and other colony management mechanics
+- Adding in predators, disease, weather, seasons, etc.
+
+I'm sure the algorithm could be optimized further too. Such as possibly using a one dimensional array instead of a two-dimensional one for the DP table?
+
+## Contribute & License
+Feel free to fork this project, open an issue, or submit a pull request. This project is licensed under the MIT License, do with it as you please.
+
+Thank you for checking out the Bee Simulator - 0/1 Knapsack Problem & Recursion Demonstration! 🌷
 
