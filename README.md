@@ -58,6 +58,16 @@ py -m unittest tests/test.py
 py tests/references.py
 ```
 
+## Directory Structure
+- `tests/` - Test files
+  - `matrices/` - Reference DP and Traceback tables stores as binary .npy files, which are easily restored into 2D arrays and compared in tests
+  - `references.py` - Generates reference DP and Traceback tables and provides helpers for evaluating in test cases
+- `beesim.py` - Primary simulation logic. Including the recursive algorithm for solving the knapsack problem.
+-`flowers.py` - Arrays of flowers for the bee to collect nectar from, try making your own!
+- `helpers.py` - Helper functions
+- `main.py` - Main script file, run this to try out Bee Simulator
+
+
 ## Uses
 Some real-world applications of the knapsack problem include:
 - Cost benefit analysis
