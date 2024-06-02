@@ -26,3 +26,6 @@ Maximize the equal collection of nectar and pollen from flowers in a single trip
 - Graph Traversal
 - Graph Search
 - Graph Algorithms
+
+# Debugging
+When running the main script file, set the DEBUG environment variable to `1` to enable debugging output.
