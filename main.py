@@ -2,7 +2,9 @@ from beesim import BeeSimulator
 
 
 def main():
-    BeeSimulator()
+    bee_sim = BeeSimulator()
+
+    bee_sim.start()
 
 
 if __name__ == "__main__":

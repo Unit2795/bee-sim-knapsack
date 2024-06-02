@@ -21,8 +21,11 @@ class BeeSimulator:
         self.total_flowers = len(game_map)
         self.dp = [[-1] * (bee_energy + 1) for _ in range(self.total_flowers)]
 
+        self.max_nectar = 0
+
+    def start(self):
         # Call the bee simulator function to find the optimal solution
-        self.total_nectar = self.calculate_ideal_collection(self.avail_flowers, self.total_flowers - 1, self.bee_energy)
+        self.max_nectar = self._max_nectar_recursive(self.avail_flowers, self.total_flowers - 1, self.bee_energy)
 
         # Print the DP and trace back table if logging is enabled
         print_matrix(self.dp, "Dynamic Programming Table (2D Matrix)")
@@ -40,7 +43,7 @@ class BeeSimulator:
         print_in_color(
             "🌙 The day is over and your bee is sleepy, they have returned to the hive for a good night's rest... 💤",
             MessageColor.BLUE)
-        print_in_color(f"Total nectar collected by your bee: {self.total_nectar}. Great Job! ⭐", MessageColor.MAGENTA)
+        print_in_color(f"Total nectar collected by your bee: {self.max_nectar}. Great Job! ⭐", MessageColor.MAGENTA)
 
     # Trace back the choices made to determine which flowers were actually collected by the bee
     def print_collected_flowers(self, flowers, bee_energy):
@@ -52,7 +55,7 @@ class BeeSimulator:
         # Start in the bottom right corner of the choices table
         for i in reversed(range(len(flowers))):
             # If the bee chose to collect the current flower, it is part of the optimal solution
-            if self.dp[i][e] != -1 and (i == 0 or self.dp[i][e] != self.dp[i-1][e]):
+            if self.dp[i][e] != -1 and (i == 0 or self.dp[i][e] != self.dp[i - 1][e]):
                 total_nectar += flowers[i].nectar
                 flower_info = (flowers[i].name, flowers[i].nectar, flowers[i].energy_cost, e, total_nectar)
                 collected_flowers.append(flower_info)
@@ -71,7 +74,7 @@ class BeeSimulator:
                 f"Bee collected {flower[1]} nectar from a {flower[0]}, expending {flower[2]} energy. (Total Nectar: {flower[4]}) (Remaining Energy: {flower[3]})",
                 MessageColor.GREEN)
 
-    def calculate_ideal_collection(self, flowers, flower_index, bee_energy):
+    def _max_nectar_recursive(self, flowers, flower_index, bee_energy):
         # BASE CASE: The bee has no more energy (columns) or there are no more flowers to visit (rows).
         # If you were writing the DP table by hand, this would be the first row and column.
         if bee_energy <= 0 or flower_index < 0:
@@ -89,14 +92,15 @@ class BeeSimulator:
         if current_flower.energy_cost > bee_energy:
             print_info_message(
                 f"Skipping {current_flower.name} due to high energy cost. Needed Energy: {current_flower.energy_cost}. Available energy: {bee_energy}. Deficit: {bee_energy - current_flower.energy_cost}  (Row: {flower_index}, Column: {bee_energy})")
-            result = self.calculate_ideal_collection(flowers, flower_index - 1, bee_energy)
+            result = self._max_nectar_recursive(flowers, flower_index - 1, bee_energy)
         else:
             # Perform a comparison between two scenarios:
             # 1. The bee collects the nectar and pollen from the current flower
             # 2. The bee skips the current flower and moves on to the next one
             # The optimal solution is the maximum nectar value of these two scenarios.
-            collect = current_flower.nectar + self.calculate_ideal_collection(flowers, flower_index - 1, bee_energy - current_flower.energy_cost)
-            not_collect = self.calculate_ideal_collection(flowers, flower_index - 1, bee_energy)
+            collect = current_flower.nectar + self._max_nectar_recursive(flowers, flower_index - 1,
+                                                                              bee_energy - current_flower.energy_cost)
+            not_collect = self._max_nectar_recursive(flowers, flower_index - 1, bee_energy)
             result = max(collect, not_collect)
 
             # Determine which scenario yields the maximum nectar value
