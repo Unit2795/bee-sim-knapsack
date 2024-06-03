@@ -60,10 +60,10 @@ py tests/references.py
 
 ## Directory Structure
 - `tests/` - Test files
-  - `matrices/` - Reference DP and Traceback tables stores as binary .npy files, which are easily restored into 2D arrays and compared in tests
-  - `references.py` - Generates reference DP and Traceback tables and provides helpers for evaluating in test cases
-- `beesim.py` - Primary simulation logic. Including the recursive algorithm for solving the knapsack problem.
--`flowers.py` - Arrays of flowers for the bee to collect nectar from, try making your own!
+  - `matrices/` - Reference DP and Traceback tables stored as binary .npy files, which are easily restored into 2D arrays and compared in tests
+  - `references.py` - Generates reference DP and Traceback tables and provides helpers for evaluating them in test cases
+- `beesim.py` - Primary simulation logic. Including the recursive algorithm for solving the knapsack problem
+- `flowers.py` - Arrays of flowers for the bee to collect nectar from, try making your own! (Adjusting the tiny_meadows or hundred_meadow will break the tests, be sure to revert changes to these if you plan on committing!)
 - `helpers.py` - Helper functions
 - `main.py` - Main script file, run this to try out Bee Simulator
 
@@ -86,7 +86,7 @@ This library could be a small part of a larger simulation or game. Some ideas fo
 - Adding more bees, specialized roles, and other colony management mechanics
 - Adding in predators, disease, weather, seasons, etc.
 
-I'm sure the algorithm could be optimized further too. Such as possibly using a one dimensional array instead of a two-dimensional one for the DP table?
+I'm sure the algorithm could be optimized further too. Such as possibly using a one dimensional array instead of a two-dimensional one?
 
 ## Contribute & License
 Feel free to fork this project, open an issue, or submit a pull request. This project is licensed under the MIT License, do with it as you please.
