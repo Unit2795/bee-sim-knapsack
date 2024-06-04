@@ -24,8 +24,19 @@ Maximize the amount of nectar a bee can harvest in a day without exceeding its a
 - Knapsack Problem
 - Backtracking
 
+## Run In Docker
+For a quick and easy way to run the simulation, you can use Docker. All you need to do is run the Dockerfile and after building, the simulation will run automatically and output live results to your terminal.
+```bash
+docker-compose up
+```
+When you are done, you can stop the container with:
+```bash
+docker-compose down
+```
+
+
 ## Install & Dependencies
-You'll need Python 3.12 or later to run this project.
+You'll ideally want Python 3.12 or later to run this project.
 
 Run the following to install dependencies:
 ```bash 

@@ -1,0 +1,9 @@
+services:
+  bee_simulator:
+    container_name: bee_simulator
+    build: .
+    volumes:
+      - .:/usr/src/app
+    command: python main.py
+    stdin_open: true  # Keeps stdin open which allows interaction if needed
+    tty: true         # Allocates a pseudoterminal which allows you to see the output in the terminal
